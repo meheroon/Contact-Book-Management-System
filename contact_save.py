@@ -112,6 +112,8 @@ def search_contact():
     matching_contacts = [
         contact for contact in contacts
         if search_query in contact["name"].lower()
+        or search_query in contact["email"].lower() 
+        or search_query in contact["phone"]
     ]
     if not matching_contacts:
         print("\nNo matching contacts found.")
@@ -120,6 +122,9 @@ def search_contact():
         for idx, contact in enumerate(matching_contacts, start=1):
             print(f"\nContact {idx}:")
             print(f"\nName: {contact['name']}")
+            print(f" Email: {contact['email']}")
+            print(f" Phone: {contact['phone']}")
+            print(f" Address: {contact['address']}")
             
 
 if __name__ == "__main__":
