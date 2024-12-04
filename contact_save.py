@@ -55,8 +55,14 @@ def save_contacts(contacts):
 def add_contact():
     print("\n ----Add a New Contact---")
     name = input("Enter the name: ").strip()
+    while not name.replace("","").isalpha():
+        name = input("Invalid input. Enter a valid name: ").strip()
     email = input("Enter the email: ").strip()
+    while not ("@" in email and "." in email):  # Basic validation for email format
+        email = input("Invalid input. Enter a valid email: ").strip()
     phone = input("Enter the phone number: ").strip()
+    
+
     address = input("Enter the address: ").strip()
 
     contacts = load_contacts()
