@@ -4,16 +4,13 @@ import csv
 
 SAVE_CONTACT = "contact.csv"
 
-
-
-
-
 def main():
     while True:
         print("\n ----Contact Book Manage System----")
         print("1. Add a Contact")
         print("2.View All Contact")
         print("3. Remove a Contact")
+        print("4. Search a Contact")
         print("0. Exit")
         choice = input ("Enter your choice: ").strip()
 
@@ -23,7 +20,9 @@ def main():
         elif choice == "2":
             view_contact()
         elif choice == "3":
-            remove_contact()    
+            remove_contact()   
+        elif choice == "4":
+            search_contact() 
         elif choice == "0":
             print("\n Exiting the program. Goodbye!")
             break
@@ -105,6 +104,23 @@ def remove_contact():
     else:
         save_contacts(updated_contacts)
         print("\nContact removed successfully!")    
+
+def search_contact():
+    print("/n-------Search a Contact------------")
+    search_query = input("Enter name to search:").strip().lower()
+    contacts = load_contacts()
+    matching_contacts = [
+        contact for contact in contacts
+        if search_query in contact["name"].lower()
+    ]
+    if not matching_contacts:
+        print("\nNo matching contacts found.")
+    else:
+        print("\nMatching Contacts:")
+        for idx, contact in enumerate(matching_contacts, start=1):
+            print(f"\nContact {idx}:")
+            print(f"\nName: {contact['name']}")
+            
 
 if __name__ == "__main__":
     main()
