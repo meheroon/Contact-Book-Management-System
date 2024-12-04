@@ -1,56 +1,7 @@
-#import json
-import os
-import csv
-
-SAVE_CONTACT = "contact.csv"
-
-def main():
-    while True:
-        print("\n ----Contact Book Manage System----")
-        print("1. Add a Contact")
-        print("2.View All Contact")
-        print("3. Remove a Contact")
-        print("4. Search a Contact")
-        print("0. Exit")
-        choice = input ("Enter your choice: ").strip()
+from file_operations import load_contacts, save_contacts
 
 
-        if choice == "1":
-            add_contact()
-        elif choice == "2":
-            view_contact()
-        elif choice == "3":
-            remove_contact()   
-        elif choice == "4":
-            search_contact() 
-        elif choice == "0":
-            print("\n Exiting the program. Goodbye!")
-            break
-        else:
-            print("\n Invalid choice. Please try again.")
-
-            
-
-# Load contacts from file
-def load_contacts():
-    contacts= []
-    if os.path.exists( SAVE_CONTACT ):
-        with open(SAVE_CONTACT, "r", encoding="utf-8") as file:
-            reader = csv.DictReader(file)
-            contacts = list(reader)
-    return contacts
-        
     
-
-#save contact to file
-def save_contacts(contacts):
-    with open(SAVE_CONTACT, "w", encoding="utf-8", newline='') as file:
-        filednames = ["name", "email", "phone", "address"]
-        writer = csv.DictWriter(file, fieldnames=filednames)
-        writer.writeheader()
-        writer.writerows(contacts)
-
-
 #add a contact
 def add_contact():
     print("\n ----Add a New Contact---")
@@ -133,7 +84,5 @@ def search_contact():
             print(f" Address: {contact['address']}")
             
 
-if __name__ == "__main__":
-    main()
 
         
